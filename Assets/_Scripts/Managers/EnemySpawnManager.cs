@@ -26,9 +26,9 @@ public class EnemySpawnManager : MonoBehaviour
         while (true)
         {
             int randomID = UnityEngine.Random.Range(0, _spawnPositions.Length);
-            if (GameplayManager.Manager.GameplayTime <= 29)
+            if (GameplayManager.Manager.GameplayTime < 30)
                 ObjectPoolManager.Manager.SpawnObject(_enemyShipPrefabs[0], _spawnPositions[randomID].position, _spawnPositions[randomID].rotation, ObjectPoolManager.PoolType.EnemyShip);
-            else if (GameplayManager.Manager.GameplayTime <= 59)
+            else if (GameplayManager.Manager.GameplayTime < 60)
                 ObjectPoolManager.Manager.SpawnObject(_enemyShipPrefabs[1], _spawnPositions[randomID].position, _spawnPositions[randomID].rotation, ObjectPoolManager.PoolType.EnemyShip);
             else
                 ObjectPoolManager.Manager.SpawnObject(_enemyShipPrefabs[2], _spawnPositions[randomID].position, _spawnPositions[randomID].rotation, ObjectPoolManager.PoolType.EnemyShip);

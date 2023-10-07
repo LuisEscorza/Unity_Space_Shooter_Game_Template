@@ -3,10 +3,10 @@ using UnityEngine;
 public class EnemyBase : Entity
 {
     #region Fields
-    [field: Header("Base Settings")]
+    [field: Header("Enemy Settings")]
     [SerializeField] private Weapon _weapon;
     [SerializeField] private int _scoreReward;
-    public bool IsAlive { get; private set; } = true;
+    [SerializeField] private GameObject[] _pickups;
     private Rigidbody2D _rb;
     private bool _firstSpawn = true;
     #endregion
@@ -38,7 +38,7 @@ public class EnemyBase : Entity
             other.TryGetComponent(out IDamageable damageable);
             damageable.TakeDamage(_weapon.DamageValue);
             AudioManager.Manager.PlaySFX(_weapon.HitAudio, 0.9f);
-            ObjectPoolManager.Manager.ReturnObjectToPool(gameObject);
+            Die();
         }
     }
     #endregion
@@ -46,8 +46,7 @@ public class EnemyBase : Entity
     #region Health Methods
     public override void Die()
     {
-        SpawnPowerup();
-        IsAlive = false;
+        SpawnPickup();
         _weapon.StopWeaponAction();
         ObjectPoolManager.Manager.ReturnObjectToPool(gameObject);
         GameplayManager.Manager.IncreaseScore(_scoreReward);
@@ -60,7 +59,7 @@ public class EnemyBase : Entity
             Die();
     }
 
-    private void SpawnPowerup()
+    private void SpawnPickup()
     {
         int chance = Random.Range(0, 99);
         if (chance < 45) //chance to spawn something at all
@@ -68,16 +67,11 @@ public class EnemyBase : Entity
             chance = Random.Range(0, 99);
             if (chance > 20)
             {
-                chance = Random.Range(0, 99);
-                if (chance < 33) //Blaster
-                    ObjectPoolManager.Manager.SpawnObject(GameplayManager.Manager.Powerups[1], transform.position, transform.rotation, ObjectPoolManager.PoolType.Powerup);
-                else if (chance < 62) //Bomber
-                    ObjectPoolManager.Manager.SpawnObject(GameplayManager.Manager.Powerups[2], transform.position, transform.rotation, ObjectPoolManager.PoolType.Powerup);
-                else //SideShip
-                    ObjectPoolManager.Manager.SpawnObject(GameplayManager.Manager.Powerups[3], transform.position, transform.rotation, ObjectPoolManager.PoolType.Powerup);
+                chance = Random.Range(1, 4);
+                ObjectPoolManager.Manager.SpawnObject(_pickups[chance], transform.position, transform.rotation, ObjectPoolManager.PoolType.Pickup);
             }
             else //Medkit
-                ObjectPoolManager.Manager.SpawnObject(GameplayManager.Manager.Powerups[0], transform.position, transform.rotation, ObjectPoolManager.PoolType.Powerup);
+                ObjectPoolManager.Manager.SpawnObject(_pickups[0], transform.position, transform.rotation, ObjectPoolManager.PoolType.Pickup);
         }
         else return;
     }

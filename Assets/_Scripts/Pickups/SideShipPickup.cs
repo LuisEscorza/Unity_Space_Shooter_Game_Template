@@ -1,5 +1,5 @@
 
-public class SideShipPowerup : Powerup
+public class SideShipPickup : Pickup
 {
     protected override void ActivatePowerup(PlayerBase player)
     {

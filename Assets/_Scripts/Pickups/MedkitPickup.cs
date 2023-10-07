@@ -1,5 +1,5 @@
 
-public class MedkitPowerup : Powerup
+public class MedkitPickup : Pickup
 {
     protected override void ActivatePowerup(PlayerBase player)
     {

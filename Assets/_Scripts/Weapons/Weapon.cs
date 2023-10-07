@@ -11,8 +11,8 @@ public abstract class Weapon : MonoBehaviour
     [field: SerializeField] private Vector3 _baseProjectileScale;
     [field: SerializeField] private int _baseLevel;
     [field: SerializeField] public int MaxLevel { get; private set; }
-    [field: SerializeField] internal GameObject _projectilePrefab;
-    [field: SerializeField] internal Transform[] _projectileSpawnPoints;
+    [field: SerializeField] protected GameObject _projectilePrefab;
+    [field: SerializeField] protected Transform[] _projectileSpawnPoints;
 
     [field: Header("Internal Stats")]
     public int DamageValue { get; private set; }
@@ -78,11 +78,6 @@ public abstract class Weapon : MonoBehaviour
     {
         DamageValue += value;
         ProjectileScale += new Vector3(sizeIncrease, sizeIncrease, 0);
-    }
-
-    protected void DecreaseDamageValue(int value)
-    {
-        DamageValue -= value;
     }
 
     protected void IncreaseFireRate(float value)

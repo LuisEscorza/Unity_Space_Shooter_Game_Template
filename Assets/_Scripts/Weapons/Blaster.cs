@@ -12,8 +12,8 @@ public class Blaster : Weapon
                 switch (Amount)
                 {
                     case 1:
-                        Projectile newProjectile = ObjectPoolManager.Manager.SpawnObject(_projectilePrefab, _projectileSpawnPoints[1].position, _projectileSpawnPoints[1].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>();
-                        PassProjectileStats(newProjectile); break;
+                        newProjectiles[0] = ObjectPoolManager.Manager.SpawnObject(_projectilePrefab, _projectileSpawnPoints[1].position, _projectileSpawnPoints[1].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>();
+                        PassProjectileStats(newProjectiles[0]); break;
                     case 2:
                         for (int i = 0; i < Amount; i++)
                         {

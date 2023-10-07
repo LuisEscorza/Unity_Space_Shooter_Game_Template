@@ -25,7 +25,7 @@ public abstract class Entity : MonoBehaviour, IDamageable
     #endregion
 
     #region Health Methods
-    internal void IncreaseHealth()
+    protected void IncreaseHealth()
     {
         Health++;
     }

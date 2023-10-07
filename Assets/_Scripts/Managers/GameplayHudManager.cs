@@ -15,7 +15,7 @@ public class GameplayHudManager : MonoBehaviour
     [field: SerializeField] private Image[] _healthPointSprites;
     [field: SerializeField] private AudioClip _gameOverAudio;
     [field: SerializeField] private TextMeshProUGUI _gameOverText;
-    [field: SerializeField] private TextMeshProUGUI _powerupMessageText;
+    [field: SerializeField] private TextMeshProUGUI _pickupMessageText;
     private string _currentMessage;
     #endregion
 
@@ -53,7 +53,7 @@ public class GameplayHudManager : MonoBehaviour
         }
     }
 
-    public void PowerupPickedUp(string messageToShow)
+    public void PickupActivated(string messageToShow)
     {
         _currentMessage = messageToShow;
         StartCoroutine(nameof(ShowPowerupMessage));
@@ -61,9 +61,9 @@ public class GameplayHudManager : MonoBehaviour
 
     private IEnumerator ShowPowerupMessage()
     {
-        _powerupMessageText.text = _currentMessage;
+        _pickupMessageText.text = _currentMessage;
         yield return new WaitForSeconds(1f);
-        _powerupMessageText.text = "";
+        _pickupMessageText.text = "";
     }
 
     public void ShowGameOver()

@@ -649,11 +649,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HUDManager>k__BackingField: {fileID: 321199646}
   _enemySpawnManager: {fileID: 321199644}
-  <Powerups>k__BackingField:
-  - {fileID: 43223404194795828, guid: 83c424dfa870b3c4d92c955476fcb05b, type: 3}
-  - {fileID: 43223404194795828, guid: 042a70eebf3846042a0697193a9e790a, type: 3}
-  - {fileID: 43223404194795828, guid: cd5a50d299a425e4baba1d877aee39eb, type: 3}
-  - {fileID: 43223404194795828, guid: 084d7fbc0b34db14da46c8b09ef84634, type: 3}
 --- !u!114 &321199644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,7 +706,7 @@ MonoBehaviour:
   - {fileID: 958552624}
   _gameOverAudio: {fileID: 8300000, guid: 3eaf7944ee05d894eb957196b799ef6f, type: 3}
   _gameOverText: {fileID: 834308311}
-  _powerupMessageText: {fileID: 1402996033}
+  _pickupMessageText: {fileID: 1402996033}
 --- !u!1 &323102098
 GameObject:
   m_ObjectHideFlags: 0

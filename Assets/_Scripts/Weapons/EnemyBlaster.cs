@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class EnemyBlaster : Weapon
 {
-    #region Fields
-    [field: Header("Enemy Weapon Settings")]
-    [field: SerializeField] private EnemyBase _enemyBase;
-    #endregion
 
     public override IEnumerator WeaponFireAction()
     {

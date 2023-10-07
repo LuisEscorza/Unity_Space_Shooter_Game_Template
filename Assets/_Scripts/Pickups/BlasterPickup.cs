@@ -1,5 +1,5 @@
 
-public class BlasterPowerup : Powerup
+public class BlasterPickup : Pickup
 {
     protected override void ActivatePowerup(PlayerBase player)
     {

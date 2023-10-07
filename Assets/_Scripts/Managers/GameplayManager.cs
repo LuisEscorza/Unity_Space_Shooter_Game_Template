@@ -12,7 +12,6 @@ public class GameplayManager : MonoBehaviour
     [field: SerializeField] private EnemySpawnManager _enemySpawnManager;
 
     [field: Header("Misc")]
-    [field: SerializeField] public GameObject[] Powerups { get; private set; }
     public int Score { get; private set; } = 0;
     public int GameplayTime { get; private set; } = 0;
     public static GameplayManager Manager { get; private set; }

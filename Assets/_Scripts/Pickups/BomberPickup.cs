@@ -1,6 +1,6 @@
 
 
-public class BomberPowerup : Powerup
+public class BomberPickup : Pickup
 {
     protected override void ActivatePowerup(PlayerBase player)
     {

@@ -8,7 +8,7 @@ public class ObjectPoolManager : MonoBehaviour
     [field: Header("Components")]
     public static ObjectPoolManager Manager { get; private set; }
     private GameObject _objectPoolEmptyHolder;
-    public enum PoolType { None, PlayerProjectile, EnemyProjectile, EnemyShip, Powerup }
+    public enum PoolType { None, PlayerProjectile, EnemyProjectile, EnemyShip, Pickup }
     private readonly Dictionary<PoolType, GameObject> _parentObjects = new();
     private readonly Dictionary<string, PooledObjectInfo> ObjectPools = new();
     #endregion

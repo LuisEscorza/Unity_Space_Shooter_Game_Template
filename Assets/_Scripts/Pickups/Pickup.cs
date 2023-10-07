@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public abstract class Powerup : MonoBehaviour
+public abstract class Pickup : MonoBehaviour
 {
-    private Rigidbody2D _rigidBody;
+    #region Fields
+    [Header("Pickup Settings")]
     [SerializeField] private float _speed;
     [SerializeField] private AudioClip _activateSound;
     [SerializeField] private string _activateMessage;
+    private Rigidbody2D _rigidBody;
+    #endregion
 
     private void Awake()
     {
@@ -26,7 +29,7 @@ public abstract class Powerup : MonoBehaviour
         {
             collision.TryGetComponent(out PlayerBase player);
             ActivatePowerup(player);
-            GameplayManager.Manager.GetComponent<GameplayHudManager>().PowerupPickedUp(_activateMessage);
+            GameplayManager.Manager.GetComponent<GameplayHudManager>().PickupActivated(_activateMessage);
             AudioManager.Manager.PlaySFX(_activateSound);
             ObjectPoolManager.Manager.ReturnObjectToPool(gameObject);
         }

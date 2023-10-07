@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f776f06f4e6edaf4fa494ff6b62fc8ff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1309c63404a533c4da75531d3f8acc53, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,17 +130,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WeaponName>k__BackingField: Enemy Blaster
   _baseDamageValue: 1
-  _baseFireRate: 0.8
-  _baseProjectileSpeed: 350
+  _baseFireRate: 2.5
+  _baseProjectileSpeed: 200
   _baseProjectileScale: {x: 1, y: 1, z: 0}
   _baseLevel: 1
-  <MaxLevel>k__BackingField: 0
-  _projectilePrefab: {fileID: 6566351817008294711, guid: e0050ecbb66cee14f97e60957bad68a3, type: 3}
+  <MaxLevel>k__BackingField: 1
+  _projectilePrefab: {fileID: 6566351817008294711, guid: a455a2eb7e95698409361aac77b91959, type: 3}
   _projectileSpawnPoints:
   - {fileID: 5287652120980264241}
   <FireAudio>k__BackingField: {fileID: 8300000, guid: bfe77d2aef744ac4fa3632fd69a4b336, type: 3}
   <HitAudio>k__BackingField: {fileID: 8300000, guid: da0e74eea4f323c40b0d86c144ffa9f7, type: 3}
-  _enemyBase: {fileID: 1186335554298196101}
 --- !u!1 &6273667406231683287
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +184,7 @@ GameObject:
   - component: {fileID: 798802525005118266}
   - component: {fileID: 2117756501738419365}
   m_Layer: 7
-  m_Name: EnemyShip3
+  m_Name: EnemyShip1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,10 +220,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c6c2ed506211546bf3440f3fe4e96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseHealth: 65
-  _baseMovementSpeed: 180
+  _baseHealth: 10
+  _baseMovementSpeed: 80
   _weapon: {fileID: 7447783279024401708}
-  _scoreReward: 50
+  _scoreReward: 5
+  _pickups:
+  - {fileID: 43223404194795828, guid: 83c424dfa870b3c4d92c955476fcb05b, type: 3}
+  - {fileID: 43223404194795828, guid: 042a70eebf3846042a0697193a9e790a, type: 3}
+  - {fileID: 43223404194795828, guid: cd5a50d299a425e4baba1d877aee39eb, type: 3}
+  - {fileID: 43223404194795828, guid: 084d7fbc0b34db14da46c8b09ef84634, type: 3}
 --- !u!50 &798802525005118266
 Rigidbody2D:
   serializedVersion: 4
