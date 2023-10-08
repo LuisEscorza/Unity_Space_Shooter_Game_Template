@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour, IDamageable
     public void SetProjectileStats(Vector3 scale, int damage, float speed, AudioClip bodyHitSound)
     {
         _trail.Clear();
-        transform.localScale = scale;
+        transform.localScale.Set(transform.localScale.x * scale.x, transform.localScale.y * scale.y, transform.localScale.z);
         _damageValue = damage;
         _speed = speed;
         _bodyHitSound = bodyHitSound;
@@ -40,7 +40,7 @@ public class Projectile : MonoBehaviour, IDamageable
         if (other.TryGetComponent(out IDamageable damageable))
         {
             damageable.TakeDamage(_damageValue);
-            AudioManager.Manager.PlaySFX(_bodyHitSound, 0.9f);
+            AudioManager.Instance.PlaySFX(_bodyHitSound, 0.9f);
             QueueForDeletion();
         }
     }
@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour, IDamageable
             if (!IsQueuedForDeletion)
             {
                 IsQueuedForDeletion = true;
-                ObjectPoolManager.Manager.ReturnObjectToPool(gameObject);
+                ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
             }
         }
     }

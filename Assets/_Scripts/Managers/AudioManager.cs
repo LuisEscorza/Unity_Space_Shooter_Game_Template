@@ -6,16 +6,16 @@ public class AudioManager : MonoBehaviour
     [field: Header("Sources")]
     [field: SerializeField] private AudioSource[] _sfxSources;
     [field: SerializeField] private AudioSource _musicSource;
-    public static AudioManager Manager;
+    public static AudioManager Instance;
     #endregion
 
     #region Misc. Methods
     private void Awake()
     {
-        if (Manager != null && Manager != this)
+        if (Instance != null && Instance != this)
             Destroy(this);
         else
-            Manager = this;
+            Instance = this;
         DontDestroyOnLoad(gameObject);
     }
     #endregion

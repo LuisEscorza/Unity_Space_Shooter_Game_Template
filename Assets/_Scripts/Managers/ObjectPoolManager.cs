@@ -6,7 +6,7 @@ public class ObjectPoolManager : MonoBehaviour
 {
     #region Fields
     [field: Header("Components")]
-    public static ObjectPoolManager Manager { get; private set; }
+    public static ObjectPoolManager Instance { get; private set; }
     private GameObject _objectPoolEmptyHolder;
     public enum PoolType { None, PlayerProjectile, EnemyProjectile, EnemyShip, Pickup }
     private readonly Dictionary<PoolType, GameObject> _parentObjects = new();
@@ -15,10 +15,10 @@ public class ObjectPoolManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Manager != null && Manager != this)
+        if (Instance != null && Instance != this)
             Destroy(this);
         else
-            Manager = this;
+            Instance = this;
         DontDestroyOnLoad(gameObject);
 
         SetupEmpties();

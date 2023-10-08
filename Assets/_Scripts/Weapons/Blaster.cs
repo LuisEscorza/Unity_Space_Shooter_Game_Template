@@ -12,7 +12,7 @@ public class Blaster : Weapon
                 switch (Amount)
                 {
                     case 1:
-                        newProjectiles[0] = ObjectPoolManager.Manager.SpawnObject(_projectilePrefab, _projectileSpawnPoints[1].position, _projectileSpawnPoints[1].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>();
+                        newProjectiles[0] = ObjectPoolManager.Instance.SpawnObject(_projectilePrefab, _projectileSpawnPoints[1].position, _projectileSpawnPoints[1].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>();
                         PassProjectileStats(newProjectiles[0]); break;
                     case 2:
                         for (int i = 0; i < Amount; i++)
@@ -20,9 +20,9 @@ public class Blaster : Weapon
                             switch (i)
                             {
                                 case 0:
-                                    newProjectiles[i] = ObjectPoolManager.Manager.SpawnObject(_projectilePrefab, _projectileSpawnPoints[0].position, _projectileSpawnPoints[0].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>(); break;
+                                    newProjectiles[i] = ObjectPoolManager.Instance.SpawnObject(_projectilePrefab, _projectileSpawnPoints[0].position, _projectileSpawnPoints[0].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>(); break;
                                 case 1:
-                                    newProjectiles[i] = ObjectPoolManager.Manager.SpawnObject(_projectilePrefab, _projectileSpawnPoints[2].position, _projectileSpawnPoints[2].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>(); break;
+                                    newProjectiles[i] = ObjectPoolManager.Instance.SpawnObject(_projectilePrefab, _projectileSpawnPoints[2].position, _projectileSpawnPoints[2].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>(); break;
                             }
                             PassProjectileStats(newProjectiles[i]);
                         }
@@ -30,12 +30,12 @@ public class Blaster : Weapon
                     case 3:
                         for (int i = 0; i < Amount; i++)
                         {
-                            newProjectiles[i] = ObjectPoolManager.Manager.SpawnObject(_projectilePrefab, _projectileSpawnPoints[i].position, _projectileSpawnPoints[i].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>();
+                            newProjectiles[i] = ObjectPoolManager.Instance.SpawnObject(_projectilePrefab, _projectileSpawnPoints[i].position, _projectileSpawnPoints[i].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>();
                             PassProjectileStats(newProjectiles[i]);
                         }
                         break;
                 }
-                AudioManager.Manager.PlaySFX(FireAudio);
+                AudioManager.Instance.PlaySFX(FireAudio);
                 ResetAttackTimer();
             }
             yield return null;

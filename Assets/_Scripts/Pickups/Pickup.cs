@@ -29,9 +29,9 @@ public abstract class Pickup : MonoBehaviour
         {
             collision.TryGetComponent(out PlayerBase player);
             ActivatePowerup(player);
-            GameplayManager.Manager.GetComponent<GameplayHudManager>().PickupActivated(_activateMessage);
-            AudioManager.Manager.PlaySFX(_activateSound);
-            ObjectPoolManager.Manager.ReturnObjectToPool(gameObject);
+            EventManager.Instance.TriggeOnPickupActivated(_activateMessage);
+            AudioManager.Instance.PlaySFX(_activateSound);
+            ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
         }
     }
 

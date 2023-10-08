@@ -37,7 +37,7 @@ public class EnemyBase : Entity
         {
             other.TryGetComponent(out IDamageable damageable);
             damageable.TakeDamage(_weapon.DamageValue);
-            AudioManager.Manager.PlaySFX(_weapon.HitAudio, 0.9f);
+            AudioManager.Instance.PlaySFX(_weapon.HitAudio, 0.9f);
             Die();
         }
     }
@@ -48,8 +48,8 @@ public class EnemyBase : Entity
     {
         SpawnPickup();
         _weapon.StopWeaponAction();
-        ObjectPoolManager.Manager.ReturnObjectToPool(gameObject);
-        GameplayManager.Manager.IncreaseScore(_scoreReward);
+        ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
+        EventManager.Instance.TriggerOnEnemyDied(_scoreReward);
     }
 
     public override void TakeDamage(int damageValue)
@@ -62,16 +62,16 @@ public class EnemyBase : Entity
     private void SpawnPickup()
     {
         int chance = Random.Range(0, 99);
-        if (chance < 45) //chance to spawn something at all
+        if (chance < 45) //Chance to spawn something at all
         {
             chance = Random.Range(0, 99);
             if (chance > 20)
             {
                 chance = Random.Range(1, 4);
-                ObjectPoolManager.Manager.SpawnObject(_pickups[chance], transform.position, transform.rotation, ObjectPoolManager.PoolType.Pickup);
+                ObjectPoolManager.Instance.SpawnObject(_pickups[chance], transform.position, transform.rotation, ObjectPoolManager.PoolType.Pickup);
             }
             else //Medkit
-                ObjectPoolManager.Manager.SpawnObject(_pickups[0], transform.position, transform.rotation, ObjectPoolManager.PoolType.Pickup);
+                ObjectPoolManager.Instance.SpawnObject(_pickups[0], transform.position, transform.rotation, ObjectPoolManager.PoolType.Pickup);
         }
         else return;
     }

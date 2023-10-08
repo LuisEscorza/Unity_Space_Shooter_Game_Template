@@ -24,6 +24,17 @@ public class GameplayHudManager : MonoBehaviour
         StartCoroutine(nameof(FPSCounter));
     }
 
+    private void OnEnable()
+    {
+        EventManager.Instance.OnPlayerHealthChanged += UpdateCurrentHealth;
+        EventManager.Instance.OnPickupActivated += PickupActivated;
+    }
+    public void OnDisable()
+    {
+        EventManager.Instance.OnPlayerHealthChanged -= UpdateCurrentHealth;
+        EventManager.Instance.OnPickupActivated -= PickupActivated;
+    }
+
     public void UpdateScoreText(int newScore)
     {
         _scoreText.text = "Score: " + newScore.ToString();
@@ -59,6 +70,7 @@ public class GameplayHudManager : MonoBehaviour
         StartCoroutine(nameof(ShowPowerupMessage));
     }
 
+
     private IEnumerator ShowPowerupMessage()
     {
         _pickupMessageText.text = _currentMessage;
@@ -66,10 +78,11 @@ public class GameplayHudManager : MonoBehaviour
         _pickupMessageText.text = "";
     }
 
+
     public void ShowGameOver()
     {
         _gameOverText.gameObject.SetActive(true);
-        AudioManager.Manager.PlaySFX(_gameOverAudio);
+        AudioManager.Instance.PlaySFX(_gameOverAudio);
         Time.timeScale = 0;
     }
 }

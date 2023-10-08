@@ -3,35 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine.Events;
 
 public class GameplayManager : MonoBehaviour
 {
     #region Fields
     [field: Header("Components")]
-    [field: SerializeField] public GameplayHudManager HUDManager { get; private set; }
     [field: SerializeField] private EnemySpawnManager _enemySpawnManager;
+
+
+    [field: Header("Events")]
+    [field: SerializeField] private UnityEvent _onPlayerDied;
+    [field: SerializeField] private UnityEvent<int> _onScoreIncreased;
+    [field: SerializeField] private UnityEvent<int> _onGameplayTimerIncreased;
 
     [field: Header("Misc")]
     public int Score { get; private set; } = 0;
     public int GameplayTime { get; private set; } = 0;
-    public static GameplayManager Manager { get; private set; }
     #endregion
 
 
-    private void Awake()
+    private void OnEnable()
     {
-        if (Manager != null && Manager != this)
-            Destroy(this);
-        else
-            Manager = this;
-        DontDestroyOnLoad(gameObject);
-
+        EventManager.Instance.OnPlayerDied += PlayerDied;
+        EventManager.Instance.OnEnemyDied += IncreaseScore;
+    }
+    public void OnDisable()
+    {
+        EventManager.Instance.OnPlayerDied -= PlayerDied;
+        EventManager.Instance.OnEnemyDied -= IncreaseScore;
     }
 
     private void Start()
     {
         StartCoroutine(nameof(StartScoreTimer));
         _enemySpawnManager.StartSpawning();
+
     }
 
     private IEnumerator StartScoreTimer()
@@ -41,14 +48,8 @@ public class GameplayManager : MonoBehaviour
         while (true)
         {
             GameplayTime++;
+            _onGameplayTimerIncreased?.Invoke(GameplayTime);
             IncreaseScore(1);
-            switch (GameplayTime)
-            {
-                case 30: _enemySpawnManager.SpawningWaitTime = 2f; break;
-                case 70: _enemySpawnManager.SpawningWaitTime = 1f; break;
-                case 130: _enemySpawnManager.SpawningWaitTime = 0.5f; break;
-                default: break;
-            }
             yield return new WaitForSeconds(1f);
         }
     }
@@ -61,13 +62,12 @@ public class GameplayManager : MonoBehaviour
     public void IncreaseScore(int amount)
     {
         Score += amount;
-        HUDManager.UpdateScoreText(Score);
+        _onScoreIncreased?.Invoke(Score);
     }
 
-    public void GameOver()
+    public void PlayerDied()
     {
+        _onPlayerDied?.Invoke();
         StopScoreTimer();
-        _enemySpawnManager.StopSpawning();
-        HUDManager.ShowGameOver();
     }
 }

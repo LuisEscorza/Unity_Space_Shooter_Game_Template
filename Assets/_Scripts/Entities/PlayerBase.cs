@@ -8,7 +8,7 @@ public class PlayerBase : Entity
         if (Health > 0)
         {
             DecreaseHealth(damageValue);
-            GameplayManager.Manager.HUDManager.UpdateCurrentHealth(Health);
+            EventManager.Instance.TriggerOnPlayerHealthChanged(Health);
         }
         if (Health <= 0) Die();
     }
@@ -19,14 +19,14 @@ public class PlayerBase : Entity
         if (Health < MaxHealth)
         {
             IncreaseHealth();
-            GameplayManager.Manager.HUDManager.UpdateCurrentHealth(Health);
+            EventManager.Instance.TriggerOnPlayerHealthChanged(Health);
         }
     }
 
     public override void Die()
     {
+        EventManager.Instance.TriggerOnPlayerDied();
         Destroy(gameObject);
-        GameplayManager.Manager.GameOver();
     }
 
 }

@@ -29,10 +29,10 @@ public class SideShip : Weapon
                 foreach (Transform shipInstance in _sideShips)
                 {
                     Vector2 projectileSpawnPosition = new(shipInstance.position.x, shipInstance.position.y + 40);
-                    newProjectile = ObjectPoolManager.Manager.SpawnObject(_projectilePrefab, projectileSpawnPosition, shipInstance.rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>();
+                    newProjectile = ObjectPoolManager.Instance.SpawnObject(_projectilePrefab, projectileSpawnPosition, shipInstance.rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>();
                     PassProjectileStats(newProjectile);
                 }
-                AudioManager.Manager.PlaySFX(FireAudio, 1f, 1.5f);
+                AudioManager.Instance.PlaySFX(FireAudio, 1f, 1.5f);
                 ResetAttackTimer();
             }
             yield return null;

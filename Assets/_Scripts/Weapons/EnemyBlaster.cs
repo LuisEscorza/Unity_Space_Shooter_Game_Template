@@ -6,13 +6,15 @@ public class EnemyBlaster : Weapon
 
     public override IEnumerator WeaponFireAction()
     {
+
+        yield return new WaitForSeconds(1);
         while (true)
         {
             if (AttackTimer >= FireRate)
             {
-                Projectile newProjectile = ObjectPoolManager.Manager.SpawnObject(_projectilePrefab, _projectileSpawnPoints[0].position, _projectileSpawnPoints[0].rotation, ObjectPoolManager.PoolType.EnemyProjectile).GetComponent<Projectile>();
+                Projectile newProjectile = ObjectPoolManager.Instance.SpawnObject(_projectilePrefab, _projectileSpawnPoints[0].position, _projectileSpawnPoints[0].rotation, ObjectPoolManager.PoolType.EnemyProjectile).GetComponent<Projectile>();
                 PassProjectileStats(newProjectile);
-                AudioManager.Manager.PlaySFX(FireAudio);
+                AudioManager.Instance.PlaySFX(FireAudio);
                 ResetAttackTimer();
             }
             yield return null;
