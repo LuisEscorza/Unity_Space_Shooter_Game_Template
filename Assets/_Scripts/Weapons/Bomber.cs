@@ -27,20 +27,14 @@ public class Bomber : Weapon
                             PassProjectileStats(newProjectiles[i]);
                         }
                         break;
-                    case 3:
+                    default:
                         for (int i = 0; i < Amount; i++)
                         {
                             newProjectiles[i] = ObjectPoolManager.Instance.SpawnObject(_projectilePrefab, _projectileSpawnPoints[i].position, _projectileSpawnPoints[i].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>(); ;
                             PassProjectileStats(newProjectiles[i]);
                         }
                         break;
-                    case 4:
-                        for (int i = 0; i < Amount; i++)
-                        {
-                            newProjectiles[i] = ObjectPoolManager.Instance.SpawnObject(_projectilePrefab, _projectileSpawnPoints[i].position, _projectileSpawnPoints[i].rotation, ObjectPoolManager.PoolType.PlayerProjectile).GetComponent<Projectile>(); ;
-                            PassProjectileStats(newProjectiles[i]);
-                        }
-                        break;
+
                 }
                 AudioManager.Instance.PlaySFX(FireAudio);
                 ResetAttackTimer();
