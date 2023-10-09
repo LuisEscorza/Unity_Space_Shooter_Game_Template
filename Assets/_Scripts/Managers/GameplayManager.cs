@@ -16,7 +16,6 @@ public class GameplayManager : MonoBehaviour
 
     [field: Header("Misc")]
     public int Score { get; private set; } = 0;
-    public int GameplayTime { get; private set; } = 0;
     #endregion
 
 
@@ -40,11 +39,9 @@ public class GameplayManager : MonoBehaviour
     private IEnumerator StartScoreTimer()
     {
         yield return new WaitForSeconds(1f);
-        GameplayTime++;
         while (true)
         {
-            GameplayTime++;
-            _onGameplayTimerIncreased?.Invoke(GameplayTime);
+            _onGameplayTimerIncreased?.Invoke(1);
             IncreaseScore(1);
             yield return new WaitForSeconds(1f);
         }
