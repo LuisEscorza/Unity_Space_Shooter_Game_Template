@@ -8,14 +8,11 @@ using UnityEngine.Events;
 public class GameplayManager : MonoBehaviour
 {
     #region Fields
-    [field: Header("Components")]
-    [field: SerializeField] private EnemySpawnManager _enemySpawnManager;
-
-
     [field: Header("Events")]
     [field: SerializeField] private UnityEvent _onPlayerDied;
     [field: SerializeField] private UnityEvent<int> _onScoreIncreased;
     [field: SerializeField] private UnityEvent<int> _onGameplayTimerIncreased;
+    [field: SerializeField] private UnityEvent _onGameStarted;
 
     [field: Header("Misc")]
     public int Score { get; private set; } = 0;
@@ -37,8 +34,7 @@ public class GameplayManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(nameof(StartScoreTimer));
-        _enemySpawnManager.StartSpawning();
-
+        _onGameStarted?.Invoke();
     }
 
     private IEnumerator StartScoreTimer()
